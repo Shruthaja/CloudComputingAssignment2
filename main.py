@@ -47,6 +47,17 @@ def page2():
         cursor.execute(query,ranje,mag)
         result=cursor.fetchall()
     return render_template("page2.html",result=result)
+@app.route('/page3.html',methods=['GET','POST'])
+def page3():
+    result=[]
+    if request.method=="POST":
+        lat=request.form['lat']
+        long=request.form['long']
+        distance=request.form['distance']
+        query="SELECT * FROM [dbo].[earthquake] WHERE ( 6371 * ACOS(COS(RADIANS(latitude)) * COS(RADIANS(?)) * COS(RADIANS(longitude) - RADIANS(?)) + SIN(RADIANS(latitude)) * SIN(RADIANS(?)) )) <=? ;"
+        cursor.execute(query,lat,long,lat,distance)
+        result=cursor.fetchall()
+    return render_template("page3.html",result=result)
 if __name__ == '__main__':
     cdn.init_app(app)
     app.run(debug=True)
