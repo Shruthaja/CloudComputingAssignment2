@@ -5,11 +5,9 @@ from flask_cdn import CDN
 
 cdn = CDN()
 import pyodbc
-import os
-from azure.storage.blob import BlobClient, BlobServiceClient
 
-# Flask constructor takes the name of
-# current module (__name__) as argument.
+
+
 app = Flask(__name__)
 server = 'assignmentservershruthaja.database.windows.net'
 database = 'assignment2'
@@ -23,10 +21,6 @@ conn = pyodbc.connect(f'DRIVER={driver};SERVER={server};DATABASE={database};UID=
 # Create a cursor object
 cursor = conn.cursor()
 
-# The route() function of the Flask class is a decorator,
-# which tells the application which URL should call
-# the associated function.
-print(cursor)
 
 
 @app.route('/', methods=['GET', 'POST'])
