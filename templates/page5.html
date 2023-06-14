@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
@@ -10,30 +10,39 @@
 </head>
 <body style="background-color:teal;">
 <ul>
-    <li><a href="/">Home</a></li>
+    <li><a href="/" >Home</a></li>
     <li><a href="/page2.html">Page2</a></li>
     <li><a href="/page3.html">Page3</a></li>
-    <li><a href="/page4.html" class="active">Page4</a></li>
-        <li><a href="/page5.html">Page5</a></li>
-
+    <li><a href="/page4.html">Page4</a></li>
+    <li><a href="/page5.html" class="active">Page5</a></li>
 </ul>
 <div style="float:right;">
     <h1>Shruthaja P Rao</h1>
     <h2>1002118604</h2>
 </div>
-        <h2 > Press Button to Cluster all earthquakes! </h2>
 <div style="margin-top:3%;">
-    <form action="/page4.html" method="post"><br>
-     <p>Enter starting mag </p> <input name="smagnum" >
-   <p>Enter ending mag</p>
-        <input name="emagnum" ><br>
-        <input  style="margin-top:1%;" type="submit" placeholder="Click me!">
+    <form action="/page5.html" method="post">
+        <label>Press Button to check all earthquakes with magnitude greater than 4 and if they occur higher at night. </label><br>
+        <input style="margin-top:2%" type="submit" placeholder="Click me!">
     </form>
-    <div style="margin-top:2%">
-        <h2> Earthquakes with magnitude {{smagnum}} to {{emagnum}}</h2>
-    <table id="example3" class="display" style="font-size:9px">
+    <div style="margin-top:3%;">
+    </div>
+</div>
+<table style="font-size:12px;  border: 1px solid black;">
+    <thead ><tr ><th style="  border: 1px solid black;">Time_Range</th><th style="  border: 1px solid black;">Count</th></tr></thead><tbody>
+{% for i in result %}
+<tr>
+  <td style="  border: 1px solid black;">{{i[0]}}</td>
+<td style="  border: 1px solid black;">{{i[1]}}</td>
+</tr>
+{% endfor %}
+    </tbody>
+  </table>
+<h3 style="margin-top:2%">Data</h3>
+<table id="example5" class="display" style="font-size:9px">
         <thead>
         <tr>
+             <th>time_range</th>
             <th>time</th>
             <th> latitude</th>
             <th>longitude</th>
@@ -59,7 +68,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for i in result %}
+        {% for i in result1 %}
         <tr>
             {% for j in i %}
             <td>
@@ -70,13 +79,15 @@
         {% endfor %}
         </tbody>
     </table>
-        </div>
-</div>
-
+</body>
+<style>
+    tr {
+  background-color: #D6EEEE;
+}
+</style>
 <script>
 
-$('#example3').DataTable();
+$('#example5').DataTable();
 
 </script>
-</body>
 </html>

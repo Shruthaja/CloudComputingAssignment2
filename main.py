@@ -81,6 +81,19 @@ def page4():
         result=cursor.fetchall()
     return render_template("page4.html",result=result,smagnum=smagnum,emagnum=emagnum)
 
+@app.route('/page5.html', methods=['GET', 'POST'])
+# ‘/’ URL is bound with hello_world() function.
+def page5():
+    result = []
+    result1=[]
+    if request.method == 'POST':
+        query = "SELECT CASE WHEN DATEPART(HOUR, [time]) >= 18 OR DATEPART(HOUR, [time]) < 6 THEN 'Night-time (6 PM - 6 AM)' ELSE 'Day-time (6 AM - 6 PM)' END AS time_range, COUNT(*) AS earthquake_count FROM [dbo].[earthquake] WHERE mag > 4 GROUP BY CASE WHEN DATEPART(HOUR, [time]) >= 18 OR DATEPART(HOUR, [time]) < 6 THEN 'Night-time (6 PM - 6 AM)' ELSE 'Day-time (6 AM - 6 PM)' END;"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        query="SELECT CASE WHEN DATEPART(HOUR, [time]) >= 18 OR DATEPART(HOUR, [time]) < 6 THEN 'Night-time (6 PM - 6 AM)' ELSE 'Day-time (6 AM - 6 PM)' END AS time_range, [time], [latitude], [longitude], [depth], [mag], [magType], [nst], [gap], [dmin], [rms], [net], [id], [updated], [place], [type], [horizontalError], [depthError], [magError], [magNst], [status], [locationSource], [magSource] FROM [dbo].[earthquake] WHERE mag > 4 GROUP BY CASE WHEN DATEPART(HOUR, [time]) >= 18 OR DATEPART(HOUR, [time]) < 6 THEN 'Night-time (6 PM - 6 AM)' ELSE 'Day-time (6 AM - 6 PM)' END, [time], [latitude], [longitude], [depth], [mag], [magType], [nst], [gap], [dmin], [rms], [net], [id], [updated], [place], [type], [horizontalError], [depthError], [magError], [magNst], [status], [locationSource], [magSource];"
+        cursor.execute(query)
+        result1=cursor.fetchall()
+    return render_template("page5.html", result=result,result1=result1)
 
 if __name__ == '__main__':
     cdn.init_app(app)
