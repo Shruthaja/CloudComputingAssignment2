@@ -1,75 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="static/style.css"><link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 
-<title>Assignment 2</title>
+    <title>Assignment 2</title>
 </head>
 <body style="background-color:teal;">
 <ul>
-  <li><a href="/" >Home</a></li>
-  <li><a href="/page2.html" class="active" >Page2</a></li>
-  <li><a href="/page3.html" >Page3</a></li>
-      <li><a href="/page4.html" >Page4</a></li>
+    <li><a href="/">Home</a></li>
+    <li><a href="/page2.html" class="active">Page2</a></li>
+    <li><a href="/page3.html">Page3</a></li>
+    <li><a href="/page4.html">Page4</a></li>
 
 </ul>
-<div style="float:right;" >
-<h1>Shruthaja P Rao</h1>
-<h2>1002118604</h2>
+<div style="float:right;">
+    <h1>Shruthaja P Rao</h1>
+    <h2>1002118604</h2>
 </div>
 <div>
     <h1>Select Earthquake mag and Time duration</h1>
     <form action="/page2.html" method="post">
-     <label>Select Mag</label>
+        <label>Select Mag</label>
         <input type="number" name="mag">
         <label>Enter Time duration(in days upto 30)</label>
         <input type="number" name="range">
         <input type="submit">
     </form>
-      <table id="example2" class="display" style="font-size:9px">
+    <table id="example2" class="display" style="font-size:9px">
         <thead>
-         <tr>
-             <th>time</th>
-        <th> latitude</th>
-        <th>longitude</th>
-      <th>depth</th>
-      <th>mag</th>
-      <th>magType</th>
-      <th>nst</th>
-        <th>gap</th>
-      <th>dmin</th>
-        <th>rms</th>
-        <th>net</th>
-        <th>id</th>
-        <th>updated</th>
-        <th>place</th>
-        <th>type</th>
-        <th>horizontalError</th>
-        <th>depthError</th>
-        <th>magError</th>
-        <th>magNst</th>
-        <th>status</th>
-        <th>locationSource</th>
-      <th>[magSource]</th>
-         </tr>
+        <tr>
+            <th>time</th>
+            <th> latitude</th>
+            <th>longitude</th>
+            <th>depth</th>
+            <th>mag</th>
+            <th>magType</th>
+            <th>nst</th>
+            <th>gap</th>
+            <th>dmin</th>
+            <th>rms</th>
+            <th>net</th>
+            <th>id</th>
+            <th>updated</th>
+            <th>place</th>
+            <th>type</th>
+            <th>horizontalError</th>
+            <th>depthError</th>
+            <th>magError</th>
+            <th>magNst</th>
+            <th>status</th>
+            <th>locationSource</th>
+            <th>[magSource]</th>
+        </tr>
         </thead>
         <tbody>
-    {% for i in result %}
-   <tr>
-       {% for j in i %}
-       <td ><div class=scrollable>{{j}}</div></td>
-       {% endfor %}
-   </tr>
-    {% endfor %}
+        {% for i in result %}
+        <tr>
+            {% for j in i %}
+            <td>
+                <div class=scrollable>{{j}}</div>
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
         </tbody>
     </table>
-        </div>
+</div>
 </div>
 <script>
 
 $('#example2').DataTable();
+
 </script>
 </body>
 </html>

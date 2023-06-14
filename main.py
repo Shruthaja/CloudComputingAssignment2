@@ -2,10 +2,12 @@ from flask import request
 from flask import Flask
 from flask import render_template
 from flask_cdn import CDN
+
 cdn = CDN()
 import pyodbc
 import os
 from azure.storage.blob import BlobClient, BlobServiceClient
+
 # Flask constructor takes the name of
 # current module (__name__) as argument.
 app = Flask(__name__)
@@ -25,42 +27,61 @@ cursor = conn.cursor()
 # which tells the application which URL should call
 # the associated function.
 print(cursor)
-@app.route('/',methods=['GET','POST'])
+
+
+@app.route('/', methods=['GET', 'POST'])
 # ‘/’ URL is bound with hello_world() function.
 def hello_world():
-    result=[]
-    if request.method=='POST':
-        query="select * from dbo.earthquake where dbo.earthquake.mag>5.0"
+    result = []
+    if request.method == 'POST':
+        query = "select * from dbo.earthquake where dbo.earthquake.mag>5.0"
         cursor.execute(query)
-        result=cursor.fetchall()
-    return render_template("index.html",result=result)
-@app.route('/page2.html',methods=['GET','POST'])
+        result = cursor.fetchall()
+    return render_template("index.html", result=result)
+
+
+@app.route('/page2.html', methods=['GET', 'POST'])
 def page2():
-    result=[]
-    if request.method=="POST":
-        mag=request.form['mag']
-        ranje=request.form['range']
-        ranje=int(ranje)
-        ranje=-1*ranje
-        latest_date='2023-06-11T19:11:07.423Z'
-        query="select * from dbo.earthquake WHERE dbo.earthquake.time >= DATEADD(DAY , ? , '2023-06-11T19:11:07.423Z') AND time <= '2023-06-11T19:11:07.423Z' and dbo.earthquake.mag=?;"
-        cursor.execute(query,ranje,mag)
-        result=cursor.fetchall()
-    return render_template("page2.html",result=result)
-@app.route('/page3.html',methods=['GET','POST'])
+    result = []
+    if request.method == "POST":
+        mag = request.form['mag']
+        ranje = request.form['range']
+        ranje = int(ranje)
+        ranje = -1 * ranje
+        latest_date = '2023-06-11T19:11:07.423Z'
+        query = "select * from dbo.earthquake WHERE dbo.earthquake.time >= DATEADD(DAY , ? , '2023-06-11T19:11:07.423Z') AND time <= '2023-06-11T19:11:07.423Z' and dbo.earthquake.mag=?;"
+        cursor.execute(query, ranje, mag)
+        result = cursor.fetchall()
+    return render_template("page2.html", result=result)
+
+
+@app.route('/page3.html', methods=['GET', 'POST'])
 def page3():
-    result=[]
-    if request.method=="POST":
-        lat=request.form['lat']
-        long=request.form['long']
-        distance=request.form['distance']
-        query="SELECT * FROM [dbo].[earthquake] WHERE ( 6371 * ACOS(COS(RADIANS(latitude)) * COS(RADIANS(?)) * COS(RADIANS(longitude) - RADIANS(?)) + SIN(RADIANS(latitude)) * SIN(RADIANS(?)) )) <=? ;"
-        cursor.execute(query,lat,long,lat,distance)
-        result=cursor.fetchall()
-    return render_template("page3.html",result=result)
-@app.route('/page4.html',methods=['GET','POST'])
+    result = []
+    if request.method == "POST":
+        lat = request.form['lat']
+        long = request.form['long']
+        distance = request.form['distance']
+        query = "SELECT * FROM [dbo].[earthquake] WHERE ( 6371 * ACOS(COS(RADIANS(latitude)) * COS(RADIANS(?)) * COS(RADIANS(longitude) - RADIANS(?)) + SIN(RADIANS(latitude)) * SIN(RADIANS(?)) )) <=? ;"
+        cursor.execute(query, lat, long, lat, distance)
+        result = cursor.fetchall()
+    return render_template("page3.html", result=result)
+
+
+@app.route('/page4.html', methods=['GET', 'POST'])
 def page4():
-    return render_template("page4.html")
+    result=[]
+    smagnum=''
+    emagnum=''
+    if request.method=="POST":
+        smagnum=request.form['smagnum']
+        emagnum=request.form['emagnum']
+        query="Select * from dbo.earthquake where mag between ? and ?"
+        cursor.execute(query,smagnum,emagnum)
+        result=cursor.fetchall()
+    return render_template("page4.html",result=result,smagnum=smagnum,emagnum=emagnum)
+
+
 if __name__ == '__main__':
     cdn.init_app(app)
     app.run(debug=True)
