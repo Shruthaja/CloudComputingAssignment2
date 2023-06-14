@@ -58,6 +58,9 @@ def page3():
         cursor.execute(query,lat,long,lat,distance)
         result=cursor.fetchall()
     return render_template("page3.html",result=result)
+@app.route('/page4.html',methods=['GET','POST'])
+def page4():
+    return render_template("page4.html")
 if __name__ == '__main__':
     cdn.init_app(app)
     app.run(debug=True)
