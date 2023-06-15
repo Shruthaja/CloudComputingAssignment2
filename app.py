@@ -73,11 +73,7 @@ def page4():
             i = list(i)
             result1.append({"x": i[0], "y": i[1], "z": i[2]})
         result1.pop()
-        for i in result1:
-            for key, value in i.items():
-                print(key, value)
         return render_template("page4.html", result=result1, smagnum=smagnum, emagnum=emagnum)
-
 
 @app.route('/page5.html', methods=['GET', 'POST'])
 # ‘/’ URL is bound with hello_world() function.
