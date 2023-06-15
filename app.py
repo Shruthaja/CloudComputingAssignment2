@@ -57,6 +57,7 @@ def page3():
 @app.route('/page4.html', methods=['GET', 'POST'])
 def page4():
     result = []
+    result1=''
     smagnum = ''
     emagnum = ''
     if request.method == "POST":
@@ -73,7 +74,7 @@ def page4():
             i = list(i)
             result1.append({"x": i[0], "y": i[1], "z": i[2]})
         result1.pop()
-        return render_template("page4.html", result=result1, smagnum=smagnum, emagnum=emagnum)
+    return render_template("page4.html", result=result1, smagnum=smagnum, emagnum=emagnum)
 
 @app.route('/page5.html', methods=['GET', 'POST'])
 # ‘/’ URL is bound with hello_world() function.
