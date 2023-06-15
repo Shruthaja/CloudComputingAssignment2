@@ -2,8 +2,6 @@ import pyodbc
 from flask import Flask
 from flask import render_template
 from flask import request
-import pandas as pd
-
 
 app = Flask(__name__)
 server = 'assignmentservershruthaja.database.windows.net'
@@ -12,10 +10,8 @@ username = 'shruthaja'
 password = 'mattu4-12'
 driver = '{ODBC Driver 17 for SQL Server}'
 
-# Establish the connection
 conn = pyodbc.connect(f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}')
 
-# Create a cursor object
 cursor = conn.cursor()
 
 
@@ -66,12 +62,21 @@ def page4():
     if request.method == "POST":
         smagnum = request.form['smagnum']
         emagnum = request.form['emagnum']
-        query = "Select * from dbo.earthquake where mag between ? and ?"
-        cursor.execute(query, smagnum, emagnum)
+        query = "Select latitude,longitude,mag from dbo.earthquake where mag between ? and ? and  ( 6371 * ACOS(COS(RADIANS(latitude)) * COS(RADIANS(?)) * COS(RADIANS(longitude) - RADIANS(?)) + SIN(RADIANS(latitude)) * SIN(RADIANS(?)) )) <=? "
+        lat = "61.051700592041"
+        long = "-151.144195556641"
+        distance = "200"
+        cursor.execute(query, smagnum, emagnum, lat, long, lat, distance)
         result = cursor.fetchall()
-        df = pd.read_sql_query(query, conn,params=[smagnum,emagnum])
-        df.to_csv("static/cluster.csv")
-    return render_template("page4.html", result=result, smagnum=smagnum, emagnum=emagnum)
+        result1 = [{}]
+        for i in result:
+            i = list(i)
+            result1.append({"x": i[0], "y": i[1], "z": i[2]})
+        result1.pop()
+        for i in result1:
+            for key, value in i.items():
+                print(key, value)
+        return render_template("page4.html", result=result1, smagnum=smagnum, emagnum=emagnum)
 
 
 @app.route('/page5.html', methods=['GET', 'POST'])

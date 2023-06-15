@@ -5,8 +5,10 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="static/style.css">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-<script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
     <title>Assignment 2</title>
+    <script src='https://cdn.plot.ly/plotly-2.24.1.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
 </head>
 <body style="background-color:teal;">
 <ul>
@@ -31,58 +33,81 @@
     </form>
     <div style="margin-top:2%">
         <h2> Earthquakes with magnitude {{smagnum}} to {{emagnum}}</h2>
-        <table id="example3" class="display" style="font-size:9px">
-            <thead>
-            <tr>
-                <th>time</th>
-                <th> latitude</th>
-                <th>longitude</th>
-                <th>depth</th>
-                <th>mag</th>
-                <th>magType</th>
-                <th>nst</th>
-                <th>gap</th>
-                <th>dmin</th>
-                <th>rms</th>
-                <th>net</th>
-                <th>id</th>
-                <th>updated</th>
-                <th>place</th>
-                <th>type</th>
-                <th>horizontalError</th>
-                <th>depthError</th>
-                <th>magError</th>
-                <th>magNst</th>
-                <th>status</th>
-                <th>locationSource</th>
-                <th>[magSource]</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for i in result %}
-            <tr>
-                {% for j in i %}
-                <td>
-                    <div class=scrollable>{{j}}</div>
-                </td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
-        <div id="my_dataviz">
-
-
-
-        </div>
 
     </div>
 </div>
-
+<div style="width:75%;height:75%;" id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
 <script>
 
-$('#example3').DataTable();
+    var rows = {{result | tojson}}
+
+function unpack(rows, key) {
+  return rows.map(function(row) { return row[key]; });
+}
+
+var data = [{
+  x: unpack(rows, 'x'),
+  y: unpack(rows, 'y'),
+  z: unpack(rows, 'z'),
+  mode: 'markers',
+  type: 'scatter3d',
+  marker: {
+    color: 'rgb(23, 190, 207)',
+    size: 2
+  }
+}, {
+  alphahull: 7,
+  opacity: 0.1,
+  type: 'mesh3d',
+  x: unpack(rows, 'x'),
+  y: unpack(rows, 'y'),
+  z: unpack(rows, 'z')
+}];
+
+var layout = {
+  autosize: true,
+  height: 750,
+  scene: {
+    aspectratio: {
+      x: 1,
+      y: 1,
+      z: 1
+    },
+    camera: {
+      center: {
+        x: 0,
+        y: 0,
+        z: 0
+      },
+      eye: {
+        x: 1.25,
+        y: 1.25,
+        z: 1.25
+      },
+      up: {
+        x: 0,
+        y: 0,
+        z: 1
+      }
+    },
+    xaxis: {
+      type: 'linear',
+      zeroline: false
+    },
+    yaxis: {
+      type: 'linear',
+      zeroline: false
+    },
+    zaxis: {
+      type: 'linear',
+      zeroline: false
+    }
+  },
+  title: '3d point clustering',
+  width: 750
+};
+
+Plotly.newPlot('myDiv', data, layout);
 
 
 </script>
