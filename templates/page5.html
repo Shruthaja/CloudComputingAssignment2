@@ -10,7 +10,7 @@
 </head>
 <body style="background-color:teal;">
 <ul>
-    <li><a href="/" >Home</a></li>
+    <li><a href="/">Home</a></li>
     <li><a href="/page2.html">Page2</a></li>
     <li><a href="/page3.html">Page3</a></li>
     <li><a href="/page4.html">Page4</a></li>
@@ -22,72 +22,81 @@
 </div>
 <div style="margin-top:3%;">
     <form action="/page5.html" method="post">
-        <label>Press Button to check all earthquakes with magnitude greater than 4 and if they occur higher at night. </label><br>
+        <label>Press Button to check all earthquakes with magnitude greater than 4 and if they occur higher at
+            night. </label><br>
         <input style="margin-top:2%" type="submit" placeholder="Click me!">
     </form>
     <div style="margin-top:3%;">
     </div>
 </div>
 <table style="font-size:12px;  border: 1px solid black;">
-    <thead ><tr ><th style="  border: 1px solid black;">Time_Range</th><th style="  border: 1px solid black;">Count</th></tr></thead><tbody>
-{% for i in result %}
-<tr>
-  <td style="  border: 1px solid black;">{{i[0]}}</td>
-<td style="  border: 1px solid black;">{{i[1]}}</td>
-</tr>
-{% endfor %}
+    <thead>
+    <tr>
+        <th style="  border: 1px solid black;">Time_Range</th>
+        <th style="  border: 1px solid black;">Count</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in result %}
+    <tr>
+        <td style="  border: 1px solid black;">{{i[0]}}</td>
+        <td style="  border: 1px solid black;">{{i[1]}}</td>
+    </tr>
+    {% endfor %}
     </tbody>
-  </table>
+</table>
 <h3 style="margin-top:2%">Data</h3>
 <table id="example5" class="display" style="font-size:9px">
-        <thead>
-        <tr>
-             <th>time_range</th>
-            <th>time</th>
-            <th> latitude</th>
-            <th>longitude</th>
-            <th>depth</th>
-            <th>mag</th>
-            <th>magType</th>
-            <th>nst</th>
-            <th>gap</th>
-            <th>dmin</th>
-            <th>rms</th>
-            <th>net</th>
-            <th>id</th>
-            <th>updated</th>
-            <th>place</th>
-            <th>type</th>
-            <th>horizontalError</th>
-            <th>depthError</th>
-            <th>magError</th>
-            <th>magNst</th>
-            <th>status</th>
-            <th>locationSource</th>
-            <th>[magSource]</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for i in result1 %}
-        <tr>
-            {% for j in i %}
-            <td>
-                <div class=scrollable>{{j}}</div>
-            </td>
-            {% endfor %}
-        </tr>
+    <thead>
+    <tr>
+        <th>time_range</th>
+        <th>time</th>
+        <th> latitude</th>
+        <th>longitude</th>
+        <th>depth</th>
+        <th>mag</th>
+        <th>magType</th>
+        <th>nst</th>
+        <th>gap</th>
+        <th>dmin</th>
+        <th>rms</th>
+        <th>net</th>
+        <th>id</th>
+        <th>updated</th>
+        <th>place</th>
+        <th>type</th>
+        <th>horizontalError</th>
+        <th>depthError</th>
+        <th>magError</th>
+        <th>magNst</th>
+        <th>status</th>
+        <th>locationSource</th>
+        <th>[magSource]</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in result1 %}
+    <tr>
+        {% for j in i %}
+        <td>
+            <div class=scrollable>{{j}}</div>
+        </td>
         {% endfor %}
-        </tbody>
-    </table>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 </body>
 <style>
     tr {
   background-color: #D6EEEE;
 }
+
 </style>
 <script>
 
 $('#example5').DataTable();
+
 
 </script>
 </html>

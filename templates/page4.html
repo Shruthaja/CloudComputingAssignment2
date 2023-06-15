@@ -14,68 +14,69 @@
     <li><a href="/page2.html">Page2</a></li>
     <li><a href="/page3.html">Page3</a></li>
     <li><a href="/page4.html" class="active">Page4</a></li>
-        <li><a href="/page5.html">Page5</a></li>
+    <li><a href="/page5.html">Page5</a></li>
 
 </ul>
 <div style="float:right;">
     <h1>Shruthaja P Rao</h1>
     <h2>1002118604</h2>
 </div>
-        <h2 > Press Button to Cluster all earthquakes! </h2>
+<h2> Press Button to Cluster all earthquakes! </h2>
 <div style="margin-top:3%;">
     <form action="/page4.html" method="post"><br>
-     <p>Enter starting mag </p> <input name="smagnum" >
-   <p>Enter ending mag</p>
-        <input name="emagnum" ><br>
-        <input  style="margin-top:1%;" type="submit" placeholder="Click me!">
+        <p>Enter starting mag </p> <input name="smagnum">
+        <p>Enter ending mag</p>
+        <input name="emagnum"><br>
+        <input style="margin-top:1%;" type="submit" placeholder="Click me!">
     </form>
     <div style="margin-top:2%">
         <h2> Earthquakes with magnitude {{smagnum}} to {{emagnum}}</h2>
-    <table id="example3" class="display" style="font-size:9px">
-        <thead>
-        <tr>
-            <th>time</th>
-            <th> latitude</th>
-            <th>longitude</th>
-            <th>depth</th>
-            <th>mag</th>
-            <th>magType</th>
-            <th>nst</th>
-            <th>gap</th>
-            <th>dmin</th>
-            <th>rms</th>
-            <th>net</th>
-            <th>id</th>
-            <th>updated</th>
-            <th>place</th>
-            <th>type</th>
-            <th>horizontalError</th>
-            <th>depthError</th>
-            <th>magError</th>
-            <th>magNst</th>
-            <th>status</th>
-            <th>locationSource</th>
-            <th>[magSource]</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for i in result %}
-        <tr>
-            {% for j in i %}
-            <td>
-                <div class=scrollable>{{j}}</div>
-            </td>
+        <table id="example3" class="display" style="font-size:9px">
+            <thead>
+            <tr>
+                <th>time</th>
+                <th> latitude</th>
+                <th>longitude</th>
+                <th>depth</th>
+                <th>mag</th>
+                <th>magType</th>
+                <th>nst</th>
+                <th>gap</th>
+                <th>dmin</th>
+                <th>rms</th>
+                <th>net</th>
+                <th>id</th>
+                <th>updated</th>
+                <th>place</th>
+                <th>type</th>
+                <th>horizontalError</th>
+                <th>depthError</th>
+                <th>magError</th>
+                <th>magNst</th>
+                <th>status</th>
+                <th>locationSource</th>
+                <th>[magSource]</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in result %}
+            <tr>
+                {% for j in i %}
+                <td>
+                    <div class=scrollable>{{j}}</div>
+                </td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-        </div>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script>
 
 $('#example3').DataTable();
+
 
 </script>
 </body>
