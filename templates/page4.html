@@ -3,8 +3,8 @@
 <head>
     <title>Assignment 2</title>
     <link rel="stylesheet" type="text/css" href="static/style.css">
-    <script src='https://cdn.plot.ly/plotly-2.24.1.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+<!--    <script src='https://cdn.plot.ly/plotly-2.24.1.min.js'></script>-->
+<!--    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>-->
 </head>
 <body style="background-color:teal;">
 <ul>
@@ -33,86 +33,86 @@
     </div>
 </div>
 <div style="width:75%;height:75%;" id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
-<script>
+<!--<script>-->
 
-    var rows = {{result | tojson}}
+<!--    var rows = {{result | tojson}}-->
 
-function unpack(rows, key) {
-  return rows.map(function(row) { return row[key]; });
-}
+<!--function unpack(rows, key) {-->
+<!--  return rows.map(function(row) { return row[key]; });-->
+<!--}-->
 
-var data = [{
-  x: unpack(rows, 'x'),
-  y: unpack(rows, 'y'),
-  z: unpack(rows, 'z'),
-  mode: 'markers',
-  type: 'scatter3d',
-  marker: {
-    color: 'rgb(23, 190, 207)',
-    size: 2
-  }
-}, {
-  alphahull: 7,
-  opacity: 0.1,
-  type: 'mesh3d',
-  x: unpack(rows, 'x'),
-  y: unpack(rows, 'y'),
-  z: unpack(rows, 'z')
-}];
+<!--var data = [{-->
+<!--  x: unpack(rows, 'x'),-->
+<!--  y: unpack(rows, 'y'),-->
+<!--  z: unpack(rows, 'z'),-->
+<!--  mode: 'markers',-->
+<!--  type: 'scatter3d',-->
+<!--  marker: {-->
+<!--    color: 'rgb(23, 190, 207)',-->
+<!--    size: 2-->
+<!--  }-->
+<!--}, {-->
+<!--  alphahull: 7,-->
+<!--  opacity: 0.1,-->
+<!--  type: 'mesh3d',-->
+<!--  x: unpack(rows, 'x'),-->
+<!--  y: unpack(rows, 'y'),-->
+<!--  z: unpack(rows, 'z')-->
+<!--}];-->
 
-var layout = {
-  autosize: true,
-  height: 750,
-  scene: {
-    aspectratio: {
-      x: 1,
-      y: 1,
-      z: 1
-    },
-    camera: {
-      center: {
-        x: 0,
-        y: 0,
-        z: 0
-      },
-      eye: {
-        x: 1.25,
-        y: 1.25,
-        z: 1.25
-      },
-      up: {
-        x: 0,
-        y: 0,
-        z: 1
-      }
-    },
-    xaxis: {
-      type: 'linear',
-      zeroline: false
-    },
-    yaxis: {
-      type: 'linear',
-      zeroline: false
-    },
-    zaxis: {
-      type: 'linear',
-      zeroline: false
-    }
-  },
-  title: '3d point clustering',
-  width: 750
-};
+<!--var layout = {-->
+<!--  autosize: true,-->
+<!--  height: 750,-->
+<!--  scene: {-->
+<!--    aspectratio: {-->
+<!--      x: 1,-->
+<!--      y: 1,-->
+<!--      z: 1-->
+<!--    },-->
+<!--    camera: {-->
+<!--      center: {-->
+<!--        x: 0,-->
+<!--        y: 0,-->
+<!--        z: 0-->
+<!--      },-->
+<!--      eye: {-->
+<!--        x: 1.25,-->
+<!--        y: 1.25,-->
+<!--        z: 1.25-->
+<!--      },-->
+<!--      up: {-->
+<!--        x: 0,-->
+<!--        y: 0,-->
+<!--        z: 1-->
+<!--      }-->
+<!--    },-->
+<!--    xaxis: {-->
+<!--      type: 'linear',-->
+<!--      zeroline: false-->
+<!--    },-->
+<!--    yaxis: {-->
+<!--      type: 'linear',-->
+<!--      zeroline: false-->
+<!--    },-->
+<!--    zaxis: {-->
+<!--      type: 'linear',-->
+<!--      zeroline: false-->
+<!--    }-->
+<!--  },-->
+<!--  title: '3d point clustering',-->
+<!--  width: 750-->
+<!--};-->
 
-Plotly.newPlot('myDiv', data, layout);
-Plotly.setPlotConfig({
-    requestHeaders: {
-        'Access-Control-Allow-Origin': '*',
-        // Add any other required headers
-    }
-});
+<!--Plotly.newPlot('myDiv', data, layout);-->
+<!--Plotly.setPlotConfig({-->
+<!--    requestHeaders: {-->
+<!--        'Access-Control-Allow-Origin': '*',-->
+<!--        // Add any other required headers-->
+<!--    }-->
+<!--});-->
 
 
 
-</script>
+<!--</script>-->
 </body>
 </html>
