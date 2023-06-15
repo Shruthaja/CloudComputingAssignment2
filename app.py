@@ -74,7 +74,7 @@ def page4():
     #         result1.append({"x": i[0], "y": i[1], "z": i[2]})
     #     result1.pop()
     #     return render_template("page4.html", result=result1, smagnum=smagnum, emagnum=emagnum)
-    return "200"
+    return render_template("page4.html")
 
 @app.route('/page5.html', methods=['GET', 'POST'])
 # ‘/’ URL is bound with hello_world() function.
