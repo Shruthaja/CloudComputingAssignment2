@@ -103,6 +103,12 @@ var layout = {
 };
 
 Plotly.newPlot('myDiv', data, layout);
+Plotly.setPlotConfig({
+    requestHeaders: {
+        'Access-Control-Allow-Origin': '*',
+        // Add any other required headers
+    }
+});
 
 
 
