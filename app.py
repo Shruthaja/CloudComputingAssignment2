@@ -56,24 +56,25 @@ def page3():
 
 @app.route('/page4.html', methods=['GET', 'POST'])
 def page4():
-    result = []
-    smagnum = ''
-    emagnum = ''
-    if request.method == "POST":
-        smagnum = request.form['smagnum']
-        emagnum = request.form['emagnum']
-        query = "Select latitude,longitude,mag from dbo.earthquake where mag between ? and ? and  ( 6371 * ACOS(COS(RADIANS(latitude)) * COS(RADIANS(?)) * COS(RADIANS(longitude) - RADIANS(?)) + SIN(RADIANS(latitude)) * SIN(RADIANS(?)) )) <=? "
-        lat = "61.051700592041"
-        long = "-151.144195556641"
-        distance = "200"
-        cursor.execute(query, smagnum, emagnum, lat, long, lat, distance)
-        result = cursor.fetchall()
-        result1 = [{}]
-        for i in result:
-            i = list(i)
-            result1.append({"x": i[0], "y": i[1], "z": i[2]})
-        result1.pop()
-        return render_template("page4.html", result=result1, smagnum=smagnum, emagnum=emagnum)
+    # result = []
+    # smagnum = ''
+    # emagnum = ''
+    # if request.method == "POST":
+    #     smagnum = request.form['smagnum']
+    #     emagnum = request.form['emagnum']
+    #     query = "Select latitude,longitude,mag from dbo.earthquake where mag between ? and ? and  ( 6371 * ACOS(COS(RADIANS(latitude)) * COS(RADIANS(?)) * COS(RADIANS(longitude) - RADIANS(?)) + SIN(RADIANS(latitude)) * SIN(RADIANS(?)) )) <=? "
+    #     lat = "61.051700592041"
+    #     long = "-151.144195556641"
+    #     distance = "200"
+    #     cursor.execute(query, smagnum, emagnum, lat, long, lat, distance)
+    #     result = cursor.fetchall()
+    #     result1 = [{}]
+    #     for i in result:
+    #         i = list(i)
+    #         result1.append({"x": i[0], "y": i[1], "z": i[2]})
+    #     result1.pop()
+    #     return render_template("page4.html", result=result1, smagnum=smagnum, emagnum=emagnum)
+    return "200"
 
 @app.route('/page5.html', methods=['GET', 'POST'])
 # ‘/’ URL is bound with hello_world() function.
