@@ -2,6 +2,8 @@ import pyodbc
 from flask import Flask
 from flask import render_template
 from flask import request
+import pandas as pd
+
 
 app = Flask(__name__)
 server = 'assignmentservershruthaja.database.windows.net'
@@ -67,6 +69,8 @@ def page4():
         query = "Select * from dbo.earthquake where mag between ? and ?"
         cursor.execute(query, smagnum, emagnum)
         result = cursor.fetchall()
+        df = pd.read_sql_query(query, conn,params=[smagnum,emagnum])
+        df.to_csv("static/cluster.csv")
     return render_template("page4.html", result=result, smagnum=smagnum, emagnum=emagnum)
 
 
