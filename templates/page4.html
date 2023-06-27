@@ -20,19 +20,20 @@
     <h2>1002118604</h2>
 </div>
 <h2> Press Button to Cluster all earthquakes! </h2>
-<div style="margin-top:3%;">
+<div style="margin-top:1%;">
     <form action="/page4.html" method="post"><br>
+        <p>Enter Longitude </p>
+        <input name="longraph" type="text"><p>Enter Latitude </p><input name="latgraph" type="text">
         <p>Enter starting mag </p> <input name="smagnum">
         <p>Enter ending mag</p>
         <input name="emagnum"><br>
         <input style="margin-top:1%;" type="submit" placeholder="Click me!">
     </form>
-    <div style="margin-top:2%">
-        <h2> Earthquakes with magnitude {{smagnum}} to {{emagnum}}</h2>
-
+    <div style="margin-top: -20%; margin-left: 30%;">
+        <h2> Earthquakes with magnitude {{smagnum}} to {{emagnum}} in a 200 sq KM area around Lat:{{latgraph}} and Long:{{longraph}}</h2>
     </div>
 </div>
-<div style="width:75%;height:75%;" id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
+<div style="top: 25%;position: absolute; margin-left: 30%;" id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
 <script>
 
     var rows = {{result | tojson}}
@@ -49,11 +50,11 @@ var data = [{
   type: 'scatter3d',
   marker: {
     color: 'rgb(23, 190, 207)',
-    size: 2
+    size: 3
   }
 }, {
   alphahull: 7,
-  opacity: 0.1,
+  opacity: 0.3,
   type: 'mesh3d',
   x: unpack(rows, 'x'),
   y: unpack(rows, 'y'),
@@ -61,7 +62,7 @@ var data = [{
 }];
 
 var layout = {
-  autosize: true,
+  autosize: false,
   height: 750,
   scene: {
     aspectratio: {
@@ -100,7 +101,7 @@ var layout = {
     }
   },
   title: '3d point clustering',
-  width: 1500
+  width: 1200
 };
 
 Plotly.newPlot('myDiv', data, layout);
